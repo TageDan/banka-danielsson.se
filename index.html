@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Whack A Danielsson</title>
+  <title>Banka Danielsson</title>
   <style>
     body, html {
       margin: 0;
@@ -24,13 +24,19 @@
       top: 50%;
       left: 50%;
       max-height: 60vh;
-      overflow-y: scroll;
+      width: 80vw;
+      max-width: 500px;
+      overflow-y: auto;
       transform: translate(-50%,-50%);
       background: white;
-      padding: 2em;
+      padding: 1em;
       border-radius: 1em;
       display: flex;
       flex-direction: column;
+    }
+
+    h1 {
+      margin: 0px;
     }
 
     #game_over_menu {
@@ -38,10 +44,12 @@
       top: 50%;
       left: 50%;
       max-height: 60vh;
-      overflow-y: scroll;
+      overflow-y: auto;
+      width: 80vw;
+      max-width: 500px;
       transform: translate(-50%,-50%);
       background: white;
-      padding: 2em;
+      padding: 1em;
       border-radius: 1em;
       display: none;
       flex-direction: column;
@@ -53,16 +61,16 @@
   <audio id="game_audio"  loop>
     <source src="assets/music.mp3" type = "audio/mpeg">
   </audio>
-  <audio id="splat_audio" >
+  <audio id="splat_audio" loop>
   <source src="assets/splat.mp3" type="audio/mpeg">
   </audio>
-  <audio id="miss_audio">
+  <audio id="miss_audio" loop>
     <source src="assets/miss.mp3" type="audio/mpeg">
   </audio>
   <canvas id="gameCanvas"></canvas>	
   <div id = "start_menu">
     <h1>Banka Danielsson</h1>
-    <p>Familjen Danielsson har blivit knäpp. Dom springer runt som höns ute på gräsmattan på Ängåsen.
+    <p>Familjen Danielsson har blivit knäpp. Dom springer runt som yra höns ute på gräsmattan på Ängåsen.
     Du måste banka vettet i dom igen!</p> Du har en minut på dig att banka så många familjemedlemmar som möjligt, men akta Ebbot! Om du slår Ebbot så måste du gå en snabb promenad med honom och du förlorar 10 sekunder.
     Om du istället träffar 5 gånger i rad utan att missa får du tillbaka 5 sekunder.</p>
     <button id = "start_button" >Börja Banka</button>

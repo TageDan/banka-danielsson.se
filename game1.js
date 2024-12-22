@@ -182,7 +182,7 @@ for (i in type_image_paths) {
   type_images[i].src = type_image_paths[i];
 }
 
-let type_prob = [0.02, 0.002, 0.0008, 0.002, 0.02, 0.01];
+let type_prob = [0.02, 0.002, 0.0008, 0.002, 0.02, 0.008];
 
 function update_probs() {
   if (points == 0) {
@@ -194,7 +194,7 @@ function update_probs() {
 
 }
 
-const type_speed_range = [[1.5, 1], [0.8, 0.5], [0.2, 0.5], [1.5, 0], [0.5, 1.5], [1, 1]];
+const type_speed_range = [[1.5, 1], [0.8, 0.5], [0.3, 0.7], [1.5, 0], [0.5, 1.5], [1, 1]];
 
 let points = 0;
 
@@ -211,14 +211,34 @@ const miss_audio = document.getElementById("miss_audio")
 const splat_audio = document.getElementById("splat_audio")
 const game_audio = document.getElementById("game_audio")
 
+
+let started_sound = 0;
+
+setInterval(() => {
+  if (performance.now() - started_sound > 200) {
+    miss_audio.volume = 0;
+    splat_audio.volume = 0;
+  };
+}, 20);
+
 function play_splat() {
+  if (splat_audio.paused) {
+    splat_audio.play();
+  }
   splat_audio.currentTime = 0;
-  splat_audio.play();
+  splat_audio.volume = 1;
+  miss_audio.volume = 0;
+  started_sound = performance.now();
 }
 
 function play_miss() {
+  if (miss_audio.paused) {
+    miss_audio.play();
+  }
   miss_audio.currentTime = 0;
-  miss_audio.play();
+  miss_audio.volume = 1;
+  splat_audio.volume = 0;
+  started_sound = performance.now();
 }
 
 let time = performance.now();
