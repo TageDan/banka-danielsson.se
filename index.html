@@ -24,7 +24,7 @@
       top: 50%;
       left: 50%;
       max-height: 60vh;
-      overflow: scroll;
+      overflow-y: scroll;
       transform: translate(-50%,-50%);
       background: white;
       padding: 2em;
@@ -38,7 +38,7 @@
       top: 50%;
       left: 50%;
       max-height: 60vh;
-      overflow: scroll;
+      overflow-y: scroll;
       transform: translate(-50%,-50%);
       background: white;
       padding: 2em;
@@ -50,9 +50,15 @@
   </style>
 </head>
 <body>
-  <audio id="game_audio" src = "/assets/music.mp3" loop></audio>
-  <audio id="splat_audio" src = "/assets/splat.mp3"></audio>
-  <audio id="miss_audio" src = "/assets/miss.mp3"></audio>
+  <audio id="game_audio"  loop>
+    <source src="assets/music.mp3" type = "audio/mpeg">
+  </audio>
+  <audio id="splat_audio" >
+  <source src="assets/splat.mp3" type="audio/mpeg">
+  </audio>
+  <audio id="miss_audio">
+    <source src="assets/miss.mp3" type="audio/mpeg">
+  </audio>
   <canvas id="gameCanvas"></canvas>	
   <div id = "start_menu">
     <h1>Banka Danielsson</h1>

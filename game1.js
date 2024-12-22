@@ -2,9 +2,8 @@ class Mole {
   constructor(t) {
     this.type = t;
     this.time = Math.random() * type_speed_range[this.type][1] + type_speed_range[this.type][0];
-    this.img = new Image();
+    this.img = type_images[t];
     const { width, height } = { width: canvas.width, height: canvas.height };
-    this.img.src = type_images[this.type];
 
     let dim = Math.min(canvas.width, canvas.height)
     this.x = Math.floor(Math.random() * 7);
@@ -44,8 +43,9 @@ class Mole {
 }
 
 function run_frame() {
-
-  timer -= 0.03;
+  let time = performance.now();
+  timer += (last_time - time) / 1000;
+  last_time = time;
 
 
   // clear screen
@@ -93,7 +93,7 @@ function run_frame() {
 
   // call next frame
   if (timer > 0) {
-    setTimeout(run_frame, 30);
+    setTimeout(run_frame, 10);
   } else {
     ctx.drawImage(bg, 0, 0, canvas.width, canvas.height);
 
@@ -117,6 +117,7 @@ canvas.onclick = (e) => {
       if (moles[m].type == 5) {
         timer -= 10;
         hits_in_row = 0;
+        moles[m].deleted = true;
       } else {
         hit = true;
         moles[m].deleted = true;
@@ -173,7 +174,13 @@ bg.addEventListener("load", () => {
   ctx.drawImage(bg, 0, 0, canvas.width, canvas.height);
 });
 
-const type_images = ["assets/mamma.png", "assets/edit.png", "assets/vidar.png", "assets/pappa.png", "assets/tage.png", "assets/ebbot.jpg"];
+const type_image_paths = ["assets/mamma.png", "assets/edit.png", "assets/vidar.png", "assets/pappa.png", "assets/tage.png", "assets/ebbot.jpg"];
+
+let type_images = [];
+for (i in type_image_paths) {
+  type_images.push(new Image());
+  type_images[i].src = type_image_paths[i];
+}
 
 let type_prob = [0.02, 0.002, 0.0008, 0.002, 0.02, 0.01];
 
@@ -214,7 +221,8 @@ function play_miss() {
   miss_audio.play();
 }
 
-
+let time = performance.now();
+let last_time = performance.now();
 function init() {
   game_audio.currentTime = 0;
   game_audio.play();
@@ -228,6 +236,9 @@ function init() {
   effects = [];
 
   timer = 60;
+
+  time = performance.now();
+  last_time = time;
 }
 
 let start_button = document.getElementById("start_button");
