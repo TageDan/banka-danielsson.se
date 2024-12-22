@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Whack A Danielsson</title>
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+    }
+    canvas {
+      display: block;
+      width: 100%;
+      height: 100%;
+      
+    }
+
+    #start_menu {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%,-50%);
+      background: white;
+      padding: 2em;
+      border-radius: 1em;
+      display: flex;
+      flex-direction: column;
+    }
+
+    #game_over_menu {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%,-50%);
+      background: white;
+      padding: 2em;
+      border-radius: 1em;
+      display: none;
+      flex-direction: column;
+    }
+    
+  </style>
+</head>
+<body>
+  <audio id="game_audio" src = "/assets/music.mp3" loop></audio>
+  <audio id="splat_audio" src = "/assets/splat.mp3"></audio>
+  <audio id="miss_audio" src = "/assets/miss.mp3"></audio>
+  <canvas id="gameCanvas"></canvas>	
+  <div id = "start_menu">
+    <h1>Banka Danielsson</h1>
+    <p>Familjen Danielsson har blivit knäpp. Dom springer runt som höns ute på gräsmattan på Ängåsen.
+    Du måste banka vettet i dom igen!</p> Du har en minut på dig att banka så många familjemedlemmar som möjligt, men akta Ebbot! Om du slår Ebbot så måste du gå en snabb promenad med honom och du förlorar 10 sekunder.
+    Om du istället träffar 5 gånger i rad utan att missa får du tillbaka 5 sekunder.</p>
+    <button id = "start_button" >Börja Banka</button>
+  </div>
+  <div id = "game_over_menu">
+  <h1>Bra Jobbat!</h1>
+  <span>Förhoppningsvis lyckades dina <span id="score_shower">5</span> träffar få tillbaka familjen Danielsson till sitt fulla förstånd.</p>
+  </span>
+  <p>Beter de sig fortfarande konstigt? Kan de behövas ännu fler bankningar kanske?</p>
+  <button id="restart_button">Kör Igen</button>
+  
+  </div>
+  <script src="game1.js"></script>
+</body>
+</html>
