@@ -1,4 +1,8 @@
+const padding = 5;
+
+
 class Mole {
+
   constructor(t) {
     this.type = t;
     this.time = Math.random() * type_speed_range[this.type][1] + type_speed_range[this.type][0];
@@ -6,8 +10,8 @@ class Mole {
     const { width, height } = { width: canvas.width, height: canvas.height };
 
     let dim = Math.min(canvas.width, canvas.height)
-    this.x = Math.floor(Math.random() * 7);
-    this.y = Math.floor(Math.random() * 7);
+    this.x = Math.floor(Math.random() * 5);
+    this.y = Math.floor(Math.random() * 5);
     this.deleted = false;
     setTimeout(() => {
       this.deleted = true;
@@ -17,15 +21,15 @@ class Mole {
   get_x_y() {
     let dim = Math.min(canvas.width, canvas.height);
     return {
-      x: dim / 10 + this.x / 7 * (canvas.width - 2 * dim / 10),
-      y: dim / 10 + this.y / 7 * (canvas.height - 2 * dim / 10),
+      x: dim / 7 + this.x / 5 * (canvas.width - 2 * dim / 7),
+      y: dim / 7 + this.y / 5 * (canvas.height - 2 * dim / 7),
     }
   }
 
   hit(x, y) {
     let dim = Math.min(canvas.width, canvas.height);
     let { x: pos_x, y: pos_y } = this.get_x_y();
-    return x > pos_x && y > pos_y && x < pos_x + dim / 10 && y < pos_y + dim / 10;
+    return x > pos_x && y > pos_y && x < pos_x + dim / 7 && y < pos_y + dim / 7;
 
   }
 
@@ -33,7 +37,7 @@ class Mole {
 
     let dim = Math.min(canvas.width, canvas.height)
     let { x, y } = this.get_x_y();
-    ctx.drawImage(this.img, x, y, dim / 10, dim / 10);
+    ctx.drawImage(this.img, x + padding, y + padding, dim / 7 - padding * 2, dim / 7 - padding * 2);
     // ctx.fillStyle = "white";
 
 
@@ -207,19 +211,22 @@ let timer = 60;
 
 let hits_in_row = 0;
 
-const miss_audio = document.getElementById("miss_audio")
-const splat_audio = document.getElementById("splat_audio")
+let miss_sound = "miss";
+let splat_sound = "splat";
+
 const game_audio = document.getElementById("game_audio")
+
+createjs.Sound.registerSound("assets/miss.mp3", miss_sound);
+createjs.Sound.registerSound("assets/splat.mp3", splat_sound);
 
 
 function play_splat() {
-  splat_audio.currentTime = 0;
-  splat_audio.play();
+  createjs.Sound.play(splat_sound);
 }
 
+
 function play_miss() {
-  miss_audio.currentTime = 0;
-  miss_audio.play();
+  createjs.Sound.play(miss_sound);
 }
 
 let time = performance.now();
