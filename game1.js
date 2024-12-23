@@ -212,33 +212,14 @@ const splat_audio = document.getElementById("splat_audio")
 const game_audio = document.getElementById("game_audio")
 
 
-let started_sound = 0;
-
-setInterval(() => {
-  if (performance.now() - started_sound > 200) {
-    miss_audio.volume = 0;
-    splat_audio.volume = 0;
-  };
-}, 20);
-
 function play_splat() {
-  if (splat_audio.paused) {
-    splat_audio.play();
-  }
   splat_audio.currentTime = 0;
-  splat_audio.volume = 1;
-  miss_audio.volume = 0;
-  started_sound = performance.now();
+  splat_audio.play();
 }
 
 function play_miss() {
-  if (miss_audio.paused) {
-    miss_audio.play();
-  }
   miss_audio.currentTime = 0;
-  miss_audio.volume = 1;
-  splat_audio.volume = 0;
-  started_sound = performance.now();
+  miss_audio.play();
 }
 
 let time = performance.now();
